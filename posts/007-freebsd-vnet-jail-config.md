@@ -1,7 +1,7 @@
 ---
 title: FreeBSD VNET Jail 구성 방법
-published: 2024-09-25T15:27:41+0900
-updated: 2025-01-07T03:00:00+0900
+published: 2024-09-25T15:27:41+09:00
+updated: 2025-05-07T18:30:00+09:00
 ---
 
 FreeBSD의 VNET Jail이 무엇인지, 어디에 쓰는지 소개한다. 구성 과정에서 마주칠 수
@@ -51,32 +51,30 @@ daemon에 의해 관리되고, 이 프로세스가 root 권한으로 실행된�
 
 [handbook-vnet]: https://docs.freebsd.org/en/books/handbook/jails/#vnet-jails
 
-**VNET Jail**은 호스트와 별개의 [네트워크 스택][network-stack]을 가진다.
-네트워크 스택이란 통신 프로토콜의 소프트웨어 구현체라는데, 솔직히 네트워크 쪽은
-아직 용어와 개념이 확실하게 잡히진 않아서 잘 모르겠다. 아무튼 그 구현체가
-다르다는 사실은 VNET Jail에서 네트워크 인터페이스와 라우팅 테이블이 호스트와
-완전히 독립되어 있다는 점에서 맥락을 이해할 수 있다.
 
-[network-stack]: https://en.wikipedia.org/wiki/Protocol_stack
+**VNET Jail**은 호스트와 완전히 분리된 네트워크 스택(L2~L7 계층)을 가진다.
+즉, 별도의 가상 이더넷 인터페이스(epair, vnet)로 고유한 MAC·L2 링크를 할당받고,
+브리지나 VLAN 등 L2 수준에서 자유롭게 구성할 수 있다는 뜻이다. 이로 인해 VNET
+Jail은 다음과 같은 특징을 갖는다.
 
-### Non-VNET Jail과 비교
+1. **VM과 마찬가지로 호스트와 별개의 IP를 할당받을 수 있다.** 독립된 L2
+   인터페이스를 통해 호스트와 다른 서브넷에 IP를 붙일 수 있으며, IP aliasing
+   없이도 완전히 분리된 라우팅·방화벽 정책을 적용 가능하다.
 
-네트워크 스택이 호스트로부터 독립되어 있다는 점에서, VNET Jail은 다음과 같은
-특징을 갖는다.
+2. **고유의 MAC 주소를 가진 가상 NIC를 사용한다.** epair 인터페이스를 통해 L2
+   프레임을 주고받으며, 브리지(bridge)나 스위치에 직접 연결할 수 있다.
 
-1. **네트워크 인터페이스가 호스트와 다르다.** 따라서 호스트와 다른 서브넷의
-   ip를 할당받을 수 있다. Non-VNET Jail는 ip aliasing을 이용하여 호스트와 같은
-   서브넷 내에서만 ip를 할당받는다.
-2. **라우팅 테이블이 호스트와 분리된다.** Non-VNET Jail에서는 policy-based
-   routing으로 라우팅을 분리할 수 있지만, VNET Jail에서는 호스트와 동등한
-   별개의 머신처럼 라우팅을 관리할 수 있다.
-3. **방화벽 규칙을 개별적으로 설정할 수 있다.** Non-VNET Jail은 호스트의 방화벽
-   규칙을 따르지만, VNET Jail은 각 Jail을 별개의 머신으로 보고 독립적인 방화벽
-   규칙을 적용할 수 있다.
-4. **관리 측면에서 호스트와 결합도가 낮아 관리가 용이하다.** 위에서 언급한
-   policy-based routing와 같이 non-VNET Jail에서도 동일한 목적을 달성할 수는
-   있어도, VNET Jail은 각 Jail을 호스트와 동등한 별개의 머신처럼 관리할 수
-   있기에 일종의 모듈화와 같은 효과가 있다.
+3. **브리지·VLAN·터널링 같은 L2 기능을 그대로 활용할 수 있다.** 호스트의
+   bridge0에 VNET Jail의 인터페이스를 addm 하거나, VLAN 태그를 트렁킹해서
+   동일한 L2 도메인에 참여시킬 수 있다.
+
+4. **방화벽·라우팅·네트워크 네임스페이스가 호스트와 완전히 분리된다.** Jail
+   내부 전용 방화벽 규칙을 운영하고, routing table을 별도로 관리할 수 있다.
+   Non-VNET Jail에서는 policy-based routing으로 라우팅을 분리할 수 있다.
+
+ 반면 Non-VNET Jail은 호스트의 물리 NIC가 속한 동일 L2 도메인(같은 MAC 링크)을
+ 공유하고, IP aliasing을 통해 같은 서브넷 내에서만 IP를 할당받는다. 따라서 L2
+ 계층부터 완전 분리가 필요한 경우에는 반드시 VNET Jail을 사용해야 한다.
 
 ### VNET Jail의 활용
 
@@ -97,7 +95,7 @@ VNET Jail은 호스트 및 다른 VNET Jail들과 각각 독립된 네트워크 
 거쳐야만 이루어질 수 있다. 이러한 구성을 통해 각 VLAN에 각각 다른 방화벽 정책을
 설정하는 등의 실험을 진행할 수 있었다.
 
-> 홈 네트워크 구성 또한 나중에 기회가 되면 포스팅하겠다.
+홈 네트워크 구성 또한 나중에 기회가 되면 포스팅하겠다.
 
 ### VNET Jail 구성 방법
 
@@ -113,7 +111,7 @@ ifconfig_bridge0="addm em0 up"
 ```
 
 > **Note.** `em0`와 같은 인터페이스 이름은 기기마다 다를 수 있으니 그대로
-> 사용할 수 없다.
+> 사용할 수는 없다.
 
 다음 내용을 `/etc/jail.conf`에 추가한다.
 
@@ -143,8 +141,7 @@ my-vnet-jail {
 }
 ```
 
-자세한 내용은 [FreeBSD handbook][handbook-creating-vnet]를
-참조한다.
+자세한 내용은 [FreeBSD handbook][handbook-creating-vnet]를 참조한다.
 
 [handbook-creating-vnet]: https://docs.freebsd.org/en/books/handbook/jails/#creating-vnet-jail
 
@@ -214,18 +211,18 @@ my-vnet-jail {
 
 위에서 소개한 방법은 각 Jail의 IP를 수동으로 할당한다. DHCP를 이용하여 자동
 할당받고자 하는 경우, 각 Jail에서 DHCP 클라이언트를 따로 구성해줘야 한다. 또한
-`jail.conf`에서 각 Jail에 대해 permission을 추가로 부여할 필요가 있던 것으로
-기억하는데, 정확한 방법은 기억나지 않는다.
+`jail.conf`에서 각 Jail에 대해 일부 restriction을 추가로 해제할 필요가 있던
+것으로 기억하는데, 정확한 방법은 기억나지 않는다.
 
 ### PostgreSQL 등 DB 구축
 
 VNET Jail과 관련은 없으나, PostgreSQL과 같은 일부 데이터베이스[^other-dbs]를
-Jail에서 정상적으로 구동하기 위해서는 해당 Jail에 별도의 제약을 해제해야 한다.
-Jail을 소개할 때 언급했듯이, Jail은 각각 자원의 할당 및 권한 관리를 세세히
-설정할 수 있다.
+Jail에서 정상적으로 구동하기 위해서는 해당 Jail에 별도의 restriction을 해제해야
+한다. Jail을 소개할 때 언급했듯이, Jail은 각각 자원의 할당 및 권한 관리를
+세세히 설정할 수 있다.
 
-PostgreSQL의 경우, `sysvipc`[^manpage-jail-2] 제약을 해제해야 한다. `jail.conf`
-파일에 다음과 같이 추가한다.
+PostgreSQL의 경우, `sysvipc`[^manpage-jail-2] restriction을 해제해야 한다.
+`jail.conf` 파일에 다음과 같이 추가한다.
 
 ```
 my-postgres-jail {
@@ -237,8 +234,7 @@ my-postgres-jail {
 ```
 
 [^other-dbs]:
-    경량의 파일 기반 데이터베이스인 SQLite는 따로 권한을 요구하지
-    않았다.
+    SQLite는 따로 restriction의 해제를 요구하지 않았다.
 
 [^manpage-jail-2]:
     `man 8 jail` 참조:
