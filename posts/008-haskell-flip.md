@@ -1,6 +1,7 @@
 ---
 title: "Haskell 토막글: flip 함수"
-published: 2024-10-12T10:30:00+0900
+published: 2024-10-12T10:30:00+09:00
+updated: 2025-05-07T18:30:00+09:00
 ---
 
 > **요점**: `flip` 안 쓰고 infix operation 활용하는 방법이 있는데, 그게 더 흔한
@@ -42,9 +43,8 @@ tn' :: T1 -> T3 -> U
 tn' = flip tn val2
 ```
 
-**질문**. `flip`를 실제로 많이 쓰나?
-
-다음 예시처럼 flip을 굳이 쓰지 않고도 infix operation을 활용할 수 있다.
+**질문**. `flip`를 실제로 많이 쓰나? 다음 예시처럼 flip을 굳이 쓰지 않고도
+infix operation을 활용할 수 있다.
 
 ```haskell
 fn :: T -> String -> U
@@ -55,8 +55,6 @@ fn' = flip fn "foobar" -- flip 사용
 fn' = (`fn` "foobar")    -- infix로 표현 후 함수로 변형
 ```
 
-infix operation 활용하는게 더 흔할까? flip도 괜찮은 선택일까? 경험상 infix
-활용하는 경우는 많이 봤는데, flip을 활용한 코드는 잘 못 봤다.
-
-개인적으로는 함수를 infix 이항 연산자로 바라봤을 때 부자연스럽지 않다면,
-flip보다 연산자로 접근하는 방법이 나은 것 같다.
+infix operation 활용하는게 더 흔할까? flip도 괜찮은 선택일까? 개인적으로는
+함수를 infix 이항 연산자로 바라봤을 때 부자연스럽지 않다면, flip보다 연산자로
+접근하는 방법이 나은 것 같다.

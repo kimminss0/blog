@@ -1,6 +1,7 @@
 ---
 title: "Haskell 토막글: η-reduction과 pointfree programming"
-published: 2024-10-12T11:22:00+0900
+published: 2024-10-12T11:22:00+09:00
+updated: 2025-05-07T18:30:00+09:00
 ---
 
 > **요점**: η-reduction을 남발하면 가독성 떨어지는데, 적절하게 쓰면 깔끔하다.
@@ -29,9 +30,8 @@ makeGreeting2 = (<>) . (<> " ")
 **pointfree** 스타일이라고 한다.
 
 위의 예시에서는 원본 함수가 pointful, eta-reduction 적용한 1, 2번이 pointfree
-스타일이다. 그런데 pointful한 원본이 가장 읽기 쉽지 않나?
-
-그냥 아래처럼 명확한 경우만 η-reduction 써야겠다.
+스타일이다. 그런데 pointful한 원본이 가장 읽기 쉽지 않나? 그냥 아래처럼 명확한
+경우만 η-reduction 써야겠다.
 
 ```haskell
 addOne :: Int -> Int

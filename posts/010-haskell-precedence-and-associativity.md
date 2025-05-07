@@ -1,6 +1,6 @@
 ---
 title: "Haskell 토막글: 연산 우선순위와 결합 방향"
-published: 2024-10-12T11:48:00+0900
+published: 2024-10-12T11:48:00+09:00
 ---
 
 > **참고**: 영어로 연산 우선순위는 precedence, 결합 방향은 associativity다.
