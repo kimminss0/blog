@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /contact
 Disallow: /404.html
 
-Sitemap: https://minseo-kim.net/sitemap.xml
+Sitemap: https://blog.mskim.org/sitemap.xml

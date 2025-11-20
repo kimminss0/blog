@@ -1,10 +1,10 @@
-# minseo-kim.net
+# Personal Blog
 
 Personal website built with [Hakyll], a static site generator written in
-Haskell. Hosted at [minseo-kim.net].
+Haskell. Hosted at [blog.mskim.org].
 
 [Hakyll]: https://jaspervdj.be/hakyll/
-[minseo-kim.net]: https://minseo-kim.net
+[blog.mskim.org]: https://blog.mskim.org
 
 ## How to Build
 

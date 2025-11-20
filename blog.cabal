@@ -3,7 +3,7 @@ name:               blog
 version:            0.1.0.0
 description:        Minseo Kim's personal blog
 
-homepage:           https://github.com/kimminss0/minseo-kim.net#readme
+homepage:           https://github.com/kimminss0/blog#readme
 license:            MIT
 license-file:       LICENSE
 author:             Minseo Kim
