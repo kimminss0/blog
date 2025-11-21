@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <title>$title$ - blog.mskim.org</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" />
     <link rel="stylesheet" href="/css/default.css" />
     <link rel="stylesheet" href="/css/syntax.css" />
     $if(katex)$
@@ -43,10 +44,16 @@
     </main>
 
     <footer>
-        <div>Copyright © 2024-2025 Minseo Kim</div>
+        <div>
+          <span class="copyright">© 2024-2025 Minseo Kim ·</span>
+          <a rel="license" class="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+            CC BY-NC 4.0
+          </a>
+          <span class="license">· BSD-2-Clause<span>
+        </div>
         <div>Powered by
-            <a href="https://jaspervdj.be/hakyll">Hakyll</a>.
-            See website <a href="https://github.com/kimminss0/blog">source</a>.
+          <a href="https://jaspervdj.be/hakyll">Hakyll</a> ·
+          Website <a href="https://github.com/kimminss0/blog">source</a>
         </div>
     </footer>
 </body>

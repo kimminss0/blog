@@ -35,6 +35,12 @@ title: About
 [Hakyll]: https://jaspervdj.be/hakyll
 [source-code]: https://github.com/kimminss0/blog
 
+## License  
+
+블로그에 게시된 코드는 **BSD-2-Clause** 라이선스를 따릅니다.
+그 외 글·이미지 등 일반 콘텐츠는 별도 표기가 없는 한
+[**CC BY-NC 4.0**](https://creativecommons.org/licenses/by-nc/4.0/) 라이선스를 따릅니다.  
+
 ## Contact
 
 [Contact Page](/contact)를 방문해주세요.

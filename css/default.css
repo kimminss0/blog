@@ -1,26 +1,29 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
 @font-face {
   font-family: "Meslo LG M DZ";
   font-style: normal;
   font-weight: normal;
+  font-display: swap;
   src: url("/fonts/MesloLGMDZ-Regular.woff2") format("woff2");
 }
 @font-face {
   font-family: "Meslo LG M DZ";
   font-style: italic;
   font-weight: normal;
+  font-display: swap;
   src: url("/fonts/MesloLGMDZ-Italic.woff2") format("woff2");
 }
 @font-face {
   font-family: "Meslo LG M DZ";
   font-style: normal;
   font-weight: bold;
+  font-display: swap;
   src: url("/fonts/MesloLGMDZ-Bold.woff2") format("woff2");
 }
 @font-face {
   font-family: "Meslo LG M DZ";
   font-style: italic;
   font-weight: bold;
+  font-display: swap;
   src: url("/fonts/MesloLGMDZ-BoldItalic.woff2") format("woff2");
 }
 
@@ -33,14 +36,20 @@ body {
   font-family: "Noto Sans KR", sans-serif;
   color: #000;
   word-break: break-word;
+
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 0 min(3.5rem, 5%);
 }
 
 header {
   border-bottom: 0.1rem solid #222;
+  margin: 1.2rem 0;
 }
 
 nav {
-  text-align: right;
+  margin: 0.75rem auto;
+  text-align: center;
 }
 
 nav a {
@@ -49,12 +58,26 @@ nav a {
   text-decoration: none;
 }
 
+nav a + a {
+  margin: 0 0 0 1.2rem;
+}
+
 footer {
   margin-top: 4rem;
   padding: 1.2rem 0;
   border-top: 0.1rem solid #222;
   font-size: 1.2rem;
   color: #555;
+  text-align: center;
+}
+
+footer > div + div {
+  margin-top: 0.5rem;
+}
+
+footer .license,
+footer .copyright {
+  white-space: nowrap;
 }
 
 h1 {
@@ -71,22 +94,19 @@ p {
   margin-block-end: 1.3em;
 }
 
-.footnotes {
-  font-size: 85%;
-}
-
-.footnotes p {
-  margin-block-start: 0.5em;
-  margin-block-end: 0.5em;
-}
-
 .article-body {
   margin-block-end: 6rem;
 }
 
 .footnotes {
+  font-size: 85%;
   margin-block-start: 6rem;
   margin-block-end: -4rem;
+}
+
+.footnotes p {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
 }
 
 .footnotes > hr {
@@ -113,33 +133,31 @@ table :is(td, th) {
 article .header {
   margin-bottom: 2.5rem;
   font-size: 1.4rem;
-  /*font-style: italic;*/
   color: #555;
 }
 
+.logo {
+  text-align: center;
+}
+
 .logo a {
+  font-size: 1.8rem;
   font-weight: bold;
   color: #000;
   text-decoration: none;
 }
 
-.logo a .gray {
-  color: #888;
-}
-
 code {
+  font-family: "Meslo LG M DZ", monospace;
   font-size: 95%;
   margin: 0;
   hyphens: manual;
 }
 pre {
+  font-family: "Meslo LG M DZ", monospace;
   margin: 1em 0;
   padding: 8px 15px;
   overflow: auto;
-}
-pre,
-code {
-  font-family: "Meslo LG M DZ", monospace;
 }
 pre code {
   padding: 0;
@@ -244,70 +262,7 @@ hr {
   white-space: nowrap;
 }
 
-@media (max-width: 319px) {
-  body {
-    width: 90%;
-    margin: 0;
-    padding: 0 5%;
-  }
-  header {
-    margin: 1.6rem 0;
-  }
-  nav {
-    margin: 0 auto 1.2rem;
-    text-align: center;
-  }
-  footer {
-    text-align: center;
-  }
-  .logo {
-    text-align: center;
-    margin: 0rem auto 1rem;
-  }
-  .logo a {
-    font-size: 2rem;
-  }
-  nav a {
-    display: block;
-    line-height: 1.6;
-  }
-}
-
-@media (min-width: 320px) {
-  body {
-    width: 90%;
-    margin: 0;
-    padding: 0 5%;
-  }
-  header {
-    margin: 1.6rem 0;
-  }
-  nav {
-    margin: 0 auto 1.2rem;
-    text-align: center;
-  }
-  footer {
-    text-align: center;
-  }
-  .logo {
-    text-align: center;
-    margin: 0rem auto 1rem;
-  }
-  .logo a {
-    font-size: 2rem;
-  }
-  nav a {
-    display: inline;
-    margin: 0 0.6rem;
-  }
-}
-
-@media (min-width: 740px) {
-  body {
-    width: 70rem;
-    margin: 0 auto;
-    padding: 0;
-  }
+@media (min-width: 540px) {
   header {
     margin: 0 0 1.5rem;
     padding: 1.2rem 0;
@@ -316,22 +271,16 @@ hr {
     margin: 0;
     text-align: right;
   }
-  nav a {
-    margin: 0 0 0 1.2rem;
-    display: inline;
-  }
   footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
   }
-  .logo {
-    margin: 0;
-    text-align: left;
+  footer > div + div {
+    margin-top: 0;
   }
   .logo a {
     float: left;
-    font-size: 1.8rem;
   }
 }
