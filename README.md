@@ -20,7 +20,7 @@ Haskell. Hosted at [blog.mskim.org].
 To build this site locally, follow these steps:
 
 ```sh
-$ cabal build all
+$ cabal build
 $ cabal exec site build
 ```
 
@@ -30,6 +30,14 @@ To preview the website locally, start the server:
 
 ```sh
 $ cabal exec site watch
+```
+
+Create an executable `deploy.sh` at the project root and put your own deployment logic in it.
+
+To deploy the website, run:
+
+```sh
+$ cabal exec site deploy
 ```
 
 ## Note

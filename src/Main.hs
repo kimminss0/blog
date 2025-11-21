@@ -11,7 +11,7 @@ import System.Process (CreateProcess (cwd), createProcess, proc, waitForProcess)
 import Text.Pandoc.Options
 
 main :: IO ()
-main = hakyll $ do
+main = hakyllWith config $ do
   match "static/**" $ do
     route $ gsubRoute "static/" (const "")
     compile copyFileCompiler
@@ -85,6 +85,12 @@ main = hakyll $ do
         >>= loadAndApplyTemplate "templates/default.html" indexCtx
 
   match "templates/*" $ compile templateBodyCompiler
+
+config :: Configuration
+config =
+  defaultConfiguration
+    { deployCommand = "./deploy.sh"
+    }
 
 appendIndex :: Routes
 appendIndex =
