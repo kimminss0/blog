@@ -64,7 +64,7 @@ nav a + a {
 
 footer {
   margin-top: 4rem;
-  padding: 1.2rem 0;
+  padding: 1.2rem 0 1.6rem;
   border-top: 0.1rem solid #222;
   font-size: 1.2rem;
   color: #555;
