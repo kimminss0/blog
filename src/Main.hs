@@ -28,7 +28,7 @@ main = hakyllWith config $ do
     route $ latexRoute `composeRoutes` setExtension "png"
     compile $ getResourceString >>= lualatex
 
-  match (fromList ["about.md", "contact.md"]) $ do
+  match "about.md" $ do
     route $ setExtension "html" `composeRoutes` appendIndex
     compile $
       pandocCustomCompiler

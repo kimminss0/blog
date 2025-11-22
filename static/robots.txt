@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /contact
 Disallow: /404.html
 
 Sitemap: https://blog.mskim.org/sitemap.xml

@@ -28,7 +28,7 @@ title: About
 
 이 블로그는 Haskell로 작성된 정적 웹사이트 생성기 [Hakyll]로 컴파일 되었습니다.  블로그의 소스코드를 [GitHub][source-code]에서 확인할 수 있습니다.
 
-[CV]: https://github.com/kimminss0/CV/blob/main/main.pdf
+[CV]: https://gitea.mskim.org/mskim/CV/raw/branch/main/main.pdf
 [Neovim]: https://neovim.io
 [Haskell]: https://www.haskell.org
 [FreeBSD]: https://www.freebsd.org
@@ -43,4 +43,7 @@ title: About
 
 ## Contact
 
-[Contact Page](/contact)를 방문해주세요.
+제 이메일로 자유롭게 연락해주세요. 감사합니다.
+
+- [kimminss0@outlook.kr](mailto:kimminss0@outlook.kr)
+
