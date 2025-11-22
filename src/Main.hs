@@ -25,7 +25,7 @@ main = hakyllWith config $ do
     compile compressCssCompiler
 
   match "latex-src/**.tex" $ do
-    route $ setExtension "png" `composeRoutes` latexRoute
+    route $ latexRoute `composeRoutes` setExtension "png"
     compile $ getResourceString >>= lualatex
 
   match (fromList ["about.md", "contact.md"]) $ do
