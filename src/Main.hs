@@ -16,17 +16,17 @@ main = hakyllWith config $ do
     route $ gsubRoute "static/" (const "")
     compile copyFileCompiler
 
-  match ("images/**" .&&. complement "images/**.tex") $ do
+  match ("assets/**" .&&. complement "assets/**.css") $ do
     route idRoute
     compile copyFileCompiler
 
-  match "images/**.tex" $ do
-    route $ setExtension "png"
-    compile $ getResourceString >>= lualatex
-
-  match "css/*" $ do
+  match "assets/**.css" $ do
     route idRoute
     compile compressCssCompiler
+
+  match "latex-src/**.tex" $ do
+    route $ setExtension "png" `composeRoutes` latexRoute
+    compile $ getResourceString >>= lualatex
 
   match (fromList ["about.md", "contact.md"]) $ do
     route $ setExtension "html" `composeRoutes` appendIndex
@@ -168,6 +168,9 @@ slugToPath =
   gsubRoute "/[0-9]*-" $
     replaceAll "-" (const "/")
       . replaceAll "/0*" (const "/")
+
+latexRoute :: Routes
+latexRoute = gsubRoute "latex-src" $ const "assets/images"
 
 lualatex :: Item String -> Compiler (Item TmpFile)
 lualatex item = do

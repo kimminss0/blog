@@ -15,13 +15,13 @@ title: About
 ```{=html}
 <div class="social-links">
     <a href="https://github.com/kimminss0">
-        <img src="/images/github.svg" alt="GitHub" />
+        <img src="/assets/images/github.svg" alt="GitHub" />
     </a>
     <a href="https://www.linkedin.com/in/kimminss0/">
-        <img src="/images/linkedin.svg" alt="Linkedin" />
+        <img src="/assets/images/linkedin.svg" alt="Linkedin" />
     </a>
     <a href="https://www.instagram.com/kimminss0">
-        <img src="/images/instagram.svg" alt="Instagram" />
+        <img src="/assets/images/instagram.svg" alt="Instagram" />
     </a>
 </div>
 ```
