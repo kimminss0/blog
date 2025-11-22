@@ -50,6 +50,7 @@ infix operation을 활용할 수 있다.
 fn :: T -> String -> U
 
 fn' :: T -> U
+
 -- TFAE:
 fn' = flip fn "foobar"  -- flip 사용
 fn' = (`fn` "foobar")   -- infix로 표현 후 함수로 변형
