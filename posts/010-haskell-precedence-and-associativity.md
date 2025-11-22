@@ -13,9 +13,9 @@ Function application의 예시로는 `show 123`이 있고, operation application
 다음은 간단한 예시다.
 
 ```haskell
-show 1 + 3   -- Error; (show 1) + 3
-show (1 + 3) -- Ok
-show $ 1 + 3 -- Ok, ($) is an operator; show $ (1 + 3)
+show 1 + 3    -- Error; (show 1) + 3
+show (1 + 3)  -- Ok
+show $ 1 + 3  -- Ok, ($) is an operator; show $ (1 + 3)
 ```
 
 같은 우선순위 내에서는 **결합 방향(associativity)**에 따라 괄호를 묶는다.
@@ -59,9 +59,9 @@ Operation application은 결합 방향을 사용자 정의할 수 있다. 연산
 
 -- TFAE:
 show . sum . map read $ ["1", "2"]
-show . sum . (map read) $ ["1", "2"] -- Function application has higher precedence.
-(show . sum . (map read)) $ ["1", "2"] -- (.) has higher precedence than ($).
-(show . (sum . (map read))) $ ["1", "2"] -- (.) is right-associative.
+show . sum . (map read) $ ["1", "2"]      -- Function application has higher precedence.
+(show . sum . (map read)) $ ["1", "2"]    -- (.) has higher precedence than ($).
+(show . (sum . (map read))) $ ["1", "2"]  -- (.) is right-associative.
 -- Result: "3" :: String
 ```
 

@@ -25,7 +25,7 @@ fn' :: T1 -> U
 
 -- TFAE:
 fn' = flip fn val2 -- flip 사용
-fn' = (`fn` val2) -- infix로 표현 후 함수로 변형
+fn' = (`fn` val2)  -- infix로 표현 후 함수로 변형
 ```
 
 **Tricky case**. 인수를 꼭 2개만 받는 함수여야만 할까? 사실, `flip`의 arg1인 `a
@@ -51,8 +51,8 @@ fn :: T -> String -> U
 
 fn' :: T -> U
 -- TFAE:
-fn' = flip fn "foobar" -- flip 사용
-fn' = (`fn` "foobar")    -- infix로 표현 후 함수로 변형
+fn' = flip fn "foobar"  -- flip 사용
+fn' = (`fn` "foobar")   -- infix로 표현 후 함수로 변형
 ```
 
 infix operation 활용하는게 더 흔할까? flip도 괜찮은 선택일까? 개인적으로는
