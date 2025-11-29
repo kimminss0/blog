@@ -22,4 +22,7 @@ executable site
                   , time
                   , process
                   , silently
+  other-modules:    Site.Compiler
+                  , Site.Context
+                  , Site.Route
   ghc-options:      -Wall -threaded -rtsopts -with-rtsopts=-N
