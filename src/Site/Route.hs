@@ -11,7 +11,7 @@ import System.FilePath ( (</>), (<.>), splitExtension )
 appendIndex :: Routes
 appendIndex =
   customRoute $
-    (\(p, e) -> p System.FilePath.</> "index" System.FilePath.<.> e) . System.FilePath.splitExtension . toFilePath
+    (\(p, e) -> p </> "index" <.> e) . splitExtension . toFilePath
 
 slugToPath :: Routes
 slugToPath =
