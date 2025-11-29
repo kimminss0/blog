@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
 
 import Hakyll
 import Site.Compiler
@@ -36,6 +37,7 @@ main = hakyllWith config $ do
         >>= renderPandocCustom
         >>= loadAndApplyTemplate "templates/post.html" postCtx
         >>= saveSnapshot "content"
+        >>= loadAndApplyTemplate "templates/with-comments.html" postCtx
         >>= loadAndApplyTemplate "templates/default.html" postCtx
 
   create ["atom.xml"] $ do
@@ -43,14 +45,13 @@ main = hakyllWith config $ do
     compile $ do
       let feedCtx = postCtx <> bodyField "description"
       posts <-
-        fmap (take 10) . recentFirst
-          =<< loadAllSnapshots "posts/*" "content"
+        fmap (take maxFeedPosts) . recentFirst =<< loadAllSnapshots "posts/*" "content"
       renderAtom feedConfig feedCtx posts
 
   create ["posts.html"] $ do
     route $ idRoute `composeRoutes` appendIndex
     compile $ do
-      posts <- recentFirst =<< loadAll "posts/*"
+      posts <- recentFirst =<< loadAllSnapshots "posts/*" "content"
       let archiveCtx =
             listField "posts" postCtx (return posts)
               <> constField "title" "Posts"
@@ -63,7 +64,7 @@ main = hakyllWith config $ do
   create ["sitemap.xml"] $ do
     route idRoute
     compile $ do
-      posts <- recentFirst =<< loadAll "posts/*"
+      posts <- recentFirst =<< loadAllSnapshots "posts/*" "content"
       let sitemapCtx =
             listField "posts" postCtx (return posts)
               <> defaultContext
@@ -80,7 +81,8 @@ main = hakyllWith config $ do
   match "index.html" $ do
     route idRoute
     compile $ do
-      posts <- recentFirst =<< loadAll "posts/*"
+      posts <-
+        fmap (take maxIndexPosts) . recentFirst =<< loadAllSnapshots "posts/*" "content"
       let indexCtx =
             listField "posts" postCtx (return posts)
               <> defaultContext
@@ -106,3 +108,9 @@ feedConfig =
       feedAuthorName = "Minseo Kim",
       feedAuthorEmail = "kimminss0@outlook.kr"
     }
+
+maxIndexPosts :: Int
+maxIndexPosts = 20
+
+maxFeedPosts :: Int
+maxFeedPosts = 10
