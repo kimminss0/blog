@@ -35,7 +35,17 @@ main = hakyllWith config $ do
       getResourceString
         >>= renderPandocCustom
         >>= loadAndApplyTemplate "templates/post.html" postCtx
+        >>= saveSnapshot "content"
         >>= loadAndApplyTemplate "templates/default.html" postCtx
+
+  create ["atom.xml"] $ do
+    route idRoute
+    compile $ do
+      let feedCtx = postCtx <> bodyField "description"
+      posts <-
+        fmap (take 10) . recentFirst
+          =<< loadAllSnapshots "posts/*" "content"
+      renderAtom feedConfig feedCtx posts
 
   create ["posts.html"] $ do
     route $ idRoute `composeRoutes` appendIndex
@@ -85,4 +95,14 @@ config :: Configuration
 config =
   defaultConfiguration
     { deployCommand = "./deploy.sh"
+    }
+
+feedConfig :: FeedConfiguration
+feedConfig =
+  FeedConfiguration
+    { feedTitle = "blog.mskim.org",
+      feedRoot = "https://blog.mskim.org",
+      feedDescription = "Minseo Kim's Blog",
+      feedAuthorName = "Minseo Kim",
+      feedAuthorEmail = "kimminss0@outlook.kr"
     }
