@@ -45,10 +45,15 @@ body {
   font-family: "Noto Sans KR", sans-serif;
   color: #000;
   word-break: break-word;
+  line-height: 1.6;
 
   max-width: 70rem;
   margin: 0 auto;
   padding: 0 min(3.5rem, 5%);
+}
+
+h1, h2, h3, h4, h5 {
+  line-height: 1.4;
 }
 
 header {
@@ -163,6 +168,7 @@ code {
   hyphens: manual;
 }
 pre {
+  line-height: 1.4;
   font-family: "Meslo LG M DZ", monospace;
   margin: 1em 0;
   padding: 8px 15px;
