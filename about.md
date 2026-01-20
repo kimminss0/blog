@@ -45,5 +45,5 @@ title: About
 
 제 이메일로 자유롭게 연락해주세요. 감사합니다.
 
-- [kimminss0@outlook.kr](mailto:kimminss0@outlook.kr)
+- [minseo@mskim.org](mailto:minseo@mskim.org)
 

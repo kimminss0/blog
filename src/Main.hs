@@ -105,7 +105,7 @@ feedConfig =
       feedRoot = "https://blog.mskim.org",
       feedDescription = "Minseo Kim's Blog",
       feedAuthorName = "Minseo Kim",
-      feedAuthorEmail = "kimminss0@outlook.kr"
+      feedAuthorEmail = "minseo@mskim.org"
     }
 
 maxIndexPosts :: Int
