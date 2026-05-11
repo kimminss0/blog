@@ -1,7 +1,7 @@
-# Personal Blog
+# Blog
 
-Personal website built with [Hakyll], a static site generator written in
-Haskell. Hosted at [blog.mskim.org].
+Personal blog built with [Hakyll], a static site generator written in Haskell.
+Hosted at [blog.mskim.org].
 
 [Hakyll]: https://jaspervdj.be/hakyll/
 [blog.mskim.org]: https://blog.mskim.org
@@ -10,7 +10,7 @@ Haskell. Hosted at [blog.mskim.org].
 
 ### Prerequisites
 
-- `cabal`: It is recommended to use GHCup for installation.
+- `cabal` (Installation via GHCup is recommended)
 - `imagemagick`: Required to convert LaTeX to PNG
 - `ghostscript`: Required to convert LaTeX to PNG
 - `texlive`: Required to convert LaTeX to PNG
