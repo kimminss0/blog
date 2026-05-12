@@ -20,9 +20,6 @@ title: About
     <a href="https://www.linkedin.com/in/kimminss0/">
         <img src="/assets/images/linkedin.svg" alt="Linkedin" />
     </a>
-    <a href="https://www.instagram.com/kimminss0">
-        <img src="/assets/images/instagram.svg" alt="Instagram" />
-    </a>
 </div>
 ```
 
