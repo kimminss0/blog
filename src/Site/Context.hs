@@ -1,18 +1,15 @@
 module Site.Context
-  ( getPinned,
-    postCtx,
+  ( postCtx,
     dropIndexHtml,
   )
 where
 
 import Data.Foldable (asum)
-import Data.Maybe (fromMaybe)
 import qualified Data.Time as DT
 import Data.Time.Clock
 import Data.Time.Format
 import Hakyll
 import System.FilePath (splitFileName, takeDirectory)
-import Text.Read (readMaybe)
 
 postCtx :: Context String
 postCtx =
@@ -63,10 +60,3 @@ getItemZonedTime key zone locale id' = do
         "%Y-%m-%dT%H:%M:%S%EZ",
         "%Y-%m-%dT%H:%M:%S"
       ]
-
-getPinned ::
-  (MonadMetadata m, MonadFail m) =>
-  Identifier ->
-  m Bool
-getPinned id' =
-  fromMaybe False . (readMaybe =<<) <$> getMetadataField id' "pinned"

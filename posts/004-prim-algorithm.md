@@ -1,9 +1,10 @@
 ---
 title: Prim 알고리즘
-katex: on
+katex: true
 published: 2024-09-18T18:00:00+09:00
 header-includes: |
   \newcommand{\abs}[1]{\left| #1 \right|}
+pinned: true
 ---
 
 > PS(Problem Solving) 문제 풀이를 위해 작성한 글입니다. 이론적인 설명은

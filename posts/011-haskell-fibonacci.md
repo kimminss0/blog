@@ -2,8 +2,8 @@
 title: "Haskell 토막글: Fibonacci 함수 구현 및 성능 개선"
 published: 2024-10-17T17:00:00+09:00
 updated: 2026-01-20T14:30:00+09:00
-pinned: "True"
-katex: on
+pinned: true
+katex: true
 ---
 
 ## 무한 리스트로 작성한 피보나치 수열

@@ -1,6 +1,7 @@
 ---
 title: "Union-find"
 published: 2024-09-14T17:00:00+09:00
+pinned: true
 ---
 
 > PS(Problem Solving) 문제 풀이를 위해 작성한 글입니다. 이론적인 설명은

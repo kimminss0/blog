@@ -1,7 +1,7 @@
 ---
 title: 최소신장트리(Minimum spanning tree, MST)
 published: 2024-09-13T17:00:00+09:00
-katex: on
+katex: true
 header-includes: |
   \newcommand{\abs}[1]{\left| #1 \right|}
 ---

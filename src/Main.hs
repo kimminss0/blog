@@ -1,6 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-import Control.Monad (filterM)
 import Hakyll
 import Site.Compiler
 import Site.Context
@@ -81,13 +80,10 @@ main = hakyllWith config $ do
   match "index.html" $ do
     route idRoute
     compile $ do
-      pinned <-
-        filterM (getPinned . itemIdentifier)
-          =<< recentFirst
-          =<< loadAllSnapshots "posts/*" "content"
+      posts <- recentFirst =<< loadAllSnapshots "posts/*" "content"
 
       let indexCtx =
-            listField "posts" postCtx (return pinned)
+            listField "posts" postCtx (return posts)
               <> defaultContext
 
       getResourceBody

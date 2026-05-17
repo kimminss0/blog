@@ -2,6 +2,7 @@
 title: FreeBSD VNET Jail 구성 방법
 published: 2024-09-25T15:27:41+09:00
 updated: 2025-05-07T18:30:00+09:00
+pinned: true
 ---
 
 FreeBSD의 VNET Jail이 무엇인지, 어디에 쓰는지 소개한다. 구성 과정에서 마주칠 수

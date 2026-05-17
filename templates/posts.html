@@ -1,2 +1,9 @@
 <p>작성한 모든 게시글은 여기서 확인할 수 있습니다.</p>
-$partial("templates/post-list.html")$
+<ul>
+  $for(posts)$
+  <li class="post-list">
+    <a href="$url$">$title$</a>
+    <span class="date">[<time datetime="$datetime$">$date$</time>]</span>
+  </li>
+  $endfor$
+</ul>
