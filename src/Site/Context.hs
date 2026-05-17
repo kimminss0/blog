@@ -1,15 +1,18 @@
 module Site.Context
-  ( postCtx,
+  ( getPinned,
+    postCtx,
     dropIndexHtml,
   )
 where
 
-import Control.Monad (msum)
+import Data.Foldable (asum)
+import Data.Maybe (fromMaybe)
 import qualified Data.Time as DT
 import Data.Time.Clock
 import Data.Time.Format
 import Hakyll
 import System.FilePath (splitFileName, takeDirectory)
+import Text.Read (readMaybe)
 
 postCtx :: Context String
 postCtx =
@@ -49,12 +52,8 @@ getItemZonedTime ::
   Identifier ->
   m DT.ZonedTime
 getItemZonedTime key zone locale id' = do
-  metadata <- getMetadata id'
-  let tryField k fmt =
-        lookupString k metadata
-          >>= parseTime' fmt
-          >>= Just . DT.utcToZonedTime zone
-  maybe empty' return $ msum [tryField key fmt | fmt <- formats]
+  time <- getMetadataField id' key
+  maybe empty' pure $ asum [DT.utcToZonedTime zone <$> (time >>= parseTime' fmt) | fmt <- formats]
   where
     empty' = fail $ "getItemZonedTime: " ++ "could not parse time for " ++ show id'
     parseTime' :: String -> String -> Maybe UTCTime
@@ -64,3 +63,10 @@ getItemZonedTime key zone locale id' = do
         "%Y-%m-%dT%H:%M:%S%EZ",
         "%Y-%m-%dT%H:%M:%S"
       ]
+
+getPinned ::
+  (MonadMetadata m, MonadFail m) =>
+  Identifier ->
+  m Bool
+getPinned id' =
+  fromMaybe False . (readMaybe =<<) <$> getMetadataField id' "pinned"

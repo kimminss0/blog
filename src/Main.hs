@@ -1,5 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
+import Control.Monad (filterM)
 import Hakyll
 import Site.Compiler
 import Site.Context
@@ -80,10 +81,13 @@ main = hakyllWith config $ do
   match "index.html" $ do
     route idRoute
     compile $ do
-      posts <-
-        fmap (take maxIndexPosts) . recentFirst =<< loadAllSnapshots "posts/*" "content"
+      pinned <-
+        filterM (getPinned . itemIdentifier)
+          =<< recentFirst
+          =<< loadAllSnapshots "posts/*" "content"
+
       let indexCtx =
-            listField "posts" postCtx (return posts)
+            listField "posts" postCtx (return pinned)
               <> defaultContext
 
       getResourceBody
@@ -107,9 +111,6 @@ feedConfig =
       feedAuthorName = "Minseo Kim",
       feedAuthorEmail = "minseo@mskim.org"
     }
-
-maxIndexPosts :: Int
-maxIndexPosts = 20
 
 maxFeedPosts :: Int
 maxFeedPosts = 10
