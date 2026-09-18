@@ -19,7 +19,7 @@ renderPandocCustom =
   let readerOpts = defaultHakyllReaderOptions
       writerOpts =
         defaultHakyllWriterOptions
-          { writerHTMLMathMethod = MathJax ""
+          { writerMathMethod = MathJax ""
           }
    in renderPandocWith readerOpts writerOpts
 
